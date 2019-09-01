@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os/exec"
 	"strings"
 	"time"
@@ -30,11 +31,7 @@ import (
 // dictCmd represents the dict command
 var dictCmd = &cobra.Command{
 	Use:   "dict",
-	Short: "Translate the English to Chinese.",
-	Long: `USEAGE:
-        - $ goyd 词/句 [是否读出来]
-        - $ goyd 'I love you' 1 /* 试一下 */
-`,
+	Short: "Translation between English and Chinese.",
 	Run: func(cmd *cobra.Command, args []string) {
 		doTranslate(args)
 	},
@@ -88,7 +85,7 @@ func doTranslate(args []string) {
 		return
 	}
 
-	input := args[0]
+	input := url.QueryEscape(args[0])
 	client := http.Client{
 		Timeout: time.Duration(time.Second * 5),
 	}
