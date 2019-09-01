@@ -71,7 +71,7 @@ type Translation struct {
 	Web         []Web    `json:"web"`
 }
 
-func doTranslate(args []string) {
+func doTranslate(args []string) int {
 	keys := make(map[int]bool)
 
 	for k, _ := range args {
@@ -82,7 +82,7 @@ func doTranslate(args []string) {
 		fmt.Println("USEAGE: ")
 		fmt.Println("\t- $ goyd 词/句 [是否读出来]")
 		fmt.Println("\t- $ goyd 'I love you' 1 /* 试一下 */")
-		return
+		return 1
 	}
 
 	input := url.QueryEscape(args[0])
@@ -93,7 +93,7 @@ func doTranslate(args []string) {
 
 	if err != nil {
 		fmt.Println("出错啦：网络不稳定啊少年，-1s")
-		return
+		return -1
 	}
 
 	defer resp.Body.Close()
@@ -131,7 +131,7 @@ func doTranslate(args []string) {
 			fmt.Println("出错啦：无词典结果，仅在获取词典结果生效")
 		}
 
-		return
+		return -1
 	}
 
 	fmt.Printf("翻译：\t%s\n", strings.Join(j.Translation[:], " / "))
@@ -157,4 +157,5 @@ func doTranslate(args []string) {
 			fmt.Println("出错啦：不好意思，我不知道怎么读")
 		}
 	}
+	return 0
 }
