@@ -24,5 +24,5 @@ package main
 import "github.com/palagend/redoron/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

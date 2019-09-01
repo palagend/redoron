@@ -10,4 +10,5 @@ require (
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0
 	golang.org/x/arch v0.0.0-20190312162104-788fe5ffcd8c // indirect
+	gotest.tools v2.2.0+incompatible
 )

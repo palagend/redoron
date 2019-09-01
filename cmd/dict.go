@@ -63,7 +63,7 @@ type Basic struct {
 	Explains []string `json:"explains"`
 }
 
-type Translation struct {
+type translation struct {
 	Translation []string `json:"translation"`
 	Basic       Basic    `json:"basic"`
 	Query       string   `json:"query"`
@@ -74,7 +74,7 @@ type Translation struct {
 func doTranslate(args []string) int {
 	keys := make(map[int]bool)
 
-	for k, _ := range args {
+	for k := range args {
 		keys[k] = true
 	}
 
@@ -103,7 +103,7 @@ func doTranslate(args []string) int {
 		fmt.Println("出错啦：有道翻译好像出问题了，-1s")
 	}
 
-	var j Translation
+	var j translation
 	err = json.Unmarshal(data, &j)
 
 	if err != nil {
