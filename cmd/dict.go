@@ -51,24 +51,24 @@ func init() {
 	// dictCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-const API string = "http://fanyi.youdao.com/openapi.do?keyfrom=go-translator&key=307165215&type=data&doctype=json&version=1.1&q="
+const api string = "http://fanyi.youdao.com/openapi.do?keyfrom=go-translator&key=307165215&type=data&doctype=json&version=1.1&q="
 
-type Web struct {
+type web struct {
 	Value []string `json:"value"`
 	Key   string   `json:"key"`
 }
 
-type Basic struct {
+type basic struct {
 	Phonetic string   `json:"phonetic"`
 	Explains []string `json:"explains"`
 }
 
 type translation struct {
 	Translation []string `json:"translation"`
-	Basic       Basic    `json:"basic"`
+	Basic       basic    `json:"basic"`
 	Query       string   `json:"query"`
 	ErrorCode   float64  `json:"errorCode"`
-	Web         []Web    `json:"web"`
+	Web         []web    `json:"web"`
 }
 
 func doTranslate(args []string) int {
@@ -89,7 +89,7 @@ func doTranslate(args []string) int {
 	client := http.Client{
 		Timeout: time.Duration(time.Second * 5),
 	}
-	resp, err := client.Get(API + input)
+	resp, err := client.Get(api + input)
 
 	if err != nil {
 		fmt.Println("出错啦：网络不稳定啊少年，-1s")
